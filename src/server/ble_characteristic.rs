@@ -4,11 +4,11 @@ use core::{cell::UnsafeCell, ffi::c_void};
 use esp_idf_svc::sys as esp_idf_sys;
 use esp_idf_sys::{ble_uuid_any_t, ble_uuid_cmp};
 
-#[cfg(all(
-  esp_idf_version_major = "5",
-  esp_idf_version_minor = "2",
-  not(esp_idf_version_patch = "0")
-))]
+// #[cfg(all(
+//   esp_idf_version_major = "5",
+//   esp_idf_version_minor = "2",
+//   not(esp_idf_version_patch = "0")
+// ))]
 use crate::cpfd::Cpfd;
 
 use crate::{
@@ -130,11 +130,11 @@ pub struct BLECharacteristic {
   svc_def_descriptors: Vec<esp_idf_sys::ble_gatt_dsc_def>,
   subscribed_list: Vec<(u16, NimbleSub)>,
   on_subscribe: Option<Box<dyn FnMut(&Self, &BLEConnDesc, NimbleSub) + Send + Sync>>,
-  #[cfg(all(
-    esp_idf_version_major = "5",
-    esp_idf_version_minor = "2",
-    not(esp_idf_version_patch = "0")
-  ))]
+  // #[cfg(all(
+  //   esp_idf_version_major = "5",
+  //   esp_idf_version_minor = "2",
+  //   not(esp_idf_version_patch = "0")
+  // ))]
   pub(crate) cpfd: [esp_idf_sys::ble_gatt_cpfd; 2],
 }
 
@@ -152,11 +152,11 @@ impl BLECharacteristic {
       svc_def_descriptors: Vec::new(),
       subscribed_list: Vec::new(),
       on_subscribe: None,
-      #[cfg(all(
-        esp_idf_version_major = "5",
-        esp_idf_version_minor = "2",
-        not(esp_idf_version_patch = "0")
-      ))]
+      // #[cfg(all(
+      //   esp_idf_version_major = "5",
+      //   esp_idf_version_minor = "2",
+      //   not(esp_idf_version_patch = "0")
+      // ))]
       cpfd: [Default::default(); 2],
     }
   }
@@ -297,11 +297,11 @@ impl BLECharacteristic {
     }
   }
 
-  #[cfg(all(
-    esp_idf_version_major = "5",
-    esp_idf_version_minor = "2",
-    not(esp_idf_version_patch = "0")
-  ))]
+  // #[cfg(all(
+  //   esp_idf_version_major = "5",
+  //   esp_idf_version_minor = "2",
+  //   not(esp_idf_version_patch = "0")
+  // ))]
   /// Set the Characteristic Presentation Format.
   pub fn cpfd(&mut self, cpfd: Cpfd) {
     if cpfd.name_space == (esp_idf_sys::BLE_GATT_CHR_NAMESPACE_BT_SIG as _) {
